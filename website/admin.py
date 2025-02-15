@@ -1,3 +1,9 @@
 from django.contrib import admin
+from website.models import contact
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name' ,'email','created_date')
+    list_filter =('email',)
+    search_fields = ('name', 'message')
+    pass
 
-# Register your models here.
+admin.site.register(contact,ContactAdmin)
