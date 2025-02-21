@@ -5,7 +5,7 @@ from blog.models import post
 
 
 def blog_page(request):
-    posts = post.objects.filter(publish_date__lte=timezone.now())
+    posts = post.objects.filter(publish_date__lte=timezone.now(),status=True)
     context = {'posts': posts}
     return render(request,'blog/blog-home.html', context)
 def single_page(request,pid):
