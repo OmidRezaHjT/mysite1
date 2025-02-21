@@ -9,7 +9,8 @@ def blog_page(request):
     context = {'posts': posts}
     return render(request,'blog/blog-home.html', context)
 def single_page(request,pid):
-    Post = get_object_or_404(post , pk=pid)
+    Posts = post.objects.filter(status=1)
+    Post = get_object_or_404(Posts , pk=pid)
     context = {'Post': Post}
     Post.counted_views+=1
     Post.save()
