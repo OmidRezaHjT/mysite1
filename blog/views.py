@@ -8,6 +8,9 @@ def blog_page(request):
     posts = post.objects.filter(publish_date__lte=timezone.now())
     context = {'posts': posts}
     return render(request,'blog/blog-home.html', context)
-def single_page(request):
-
-    return render(request,'blog/blog-single.html')
+def single_page(request,pid):
+    Post = get_object_or_404(post , pk=pid)
+    context = {'Post': Post}
+    Post.counted_views+=1
+    Post.save()
+    return render(request,'blog/blog-single.html',context) 
