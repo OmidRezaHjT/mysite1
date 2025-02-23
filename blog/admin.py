@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import post
+from blog.models import post , category
 
 class postAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_date'
@@ -8,3 +8,4 @@ class postAdmin(admin.ModelAdmin):
     list_filter = ('status','author')
     search_fields = ['title','content']
 admin.site.register(post,postAdmin)  
+admin.site.register(category)
