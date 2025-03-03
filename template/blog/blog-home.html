@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 		{% load static %}
 		{% block content %}
+		{% load blog_tags %}
 			<!-- start banner Area -->
 			<section class="banner-area relative blog-home-banner" id="home">	
 				<div class="overlay overlay-bg"></div>
@@ -140,9 +141,9 @@
 							<div class="widget-wrap">
 								 {% include "blog/blog-search.html" %}
 								 {% include "blog/blog-author.html" %}
-								 {% include "blog/blog-popularpost.html" %}
+								 {% latestposts %}
 								 {% include "blog/blog-ads.html" %}
-								 {% include "blog/blog-postcat.html" %}	
+								 {% postcategories %}	
 								 {% include "blog/blog-newsletter.html" %}
 								 {% include "blog/blog-tags.html" %}								
 							</div>
