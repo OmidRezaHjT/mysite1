@@ -4,8 +4,10 @@ from blog.models import post
 
 
 
-def blog_page(request):
+def blog_page(request,cat_name=None):
     posts = post.objects.filter(publish_date__lte=timezone.now(),status=True)
+    if cat_name:
+        posts = posts.filter(category__name=cat_name)
     context = {'posts': posts}
     return render(request,'blog/blog-home.html', context)
 def single_page(request,pid):
@@ -18,8 +20,3 @@ def single_page(request,pid):
     context = {'Post': Post ,'prev_post':prev_post , 'next_post' : next_post}
     return render(request,'blog/blog-single.html',context) 
 
-def blog_category(request, cat_name):
-    posts = post.objects.filter(publish_date__lte=timezone.now(),status=True)
-    posts = posts.filter(category__name=cat_name)
-    context = {'posts': posts}
-    return render(request,'blog/blog-home.html',context)
