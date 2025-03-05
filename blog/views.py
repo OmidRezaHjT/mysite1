@@ -15,7 +15,11 @@ def single_page(request,pid):
     Post.save()
     prev_post = post.objects.filter(publish_date__lte=timezone.now(),status= True, id__lt=Post.id).order_by('-publish_date').first()
     next_post = post.objects.filter(publish_date__lte=timezone.now(),status= True, id__gt=Post.id).order_by('publish_date').first()
-
-
     context = {'Post': Post ,'prev_post':prev_post , 'next_post' : next_post}
     return render(request,'blog/blog-single.html',context) 
+
+def blog_category(request, cat_name):
+    posts = post.objects.filter(publish_date__lte=timezone.now(),status=True)
+    posts = posts.filter(category__name=cat_name)
+    context = {'posts': posts}
+    return render(request,'blog/blog-home.html',context)
