@@ -18,7 +18,7 @@
                     </div>
                     <div class="details">
                         <div class="tags">
-                            {% for cat in category.all %}
+                            {% for cat in post.category.all %}
                             <ul>
                                 <li>
                                     <a href="{% url 'blog:category' cat_name=cat.name %}">{{cat.name}}</a>
