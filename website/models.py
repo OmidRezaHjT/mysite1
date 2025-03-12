@@ -10,5 +10,12 @@ class contact(models.Model):
 
 class Meta:
     ordering = ('created_date',) 
-def __str__(self):
-    return self.name
+    def __str__(self):
+        return self.name
+
+class newsletter(models.Model):
+    email = models.EmailField(max_length=255)
+
+
+    def __str__(self):
+        return self.email
