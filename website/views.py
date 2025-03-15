@@ -14,7 +14,9 @@ def contact_page(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            ticket = form.save(commit=False)  
+            ticket.name = "unknown"
+            ticket.save()  
             messages.add_message(request, messages.SUCCESS, "Ur ticket successfully saved")
     form = ContactForm() 
     return render(request,'website/contact.html',{'form':form})
