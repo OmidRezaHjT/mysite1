@@ -108,7 +108,7 @@
 									</div>
 									<a class="posts-title" href="{% url 'blog:single' pid=post.id %}"><h3>{{post.title}}</h3></a>
 									<p class="excert">
-										{{post.content|truncatewords:10}}
+										{{post.content|safe|truncatewords:10}}
 									</p>
 									<a href="#" class="primary-btn">View More</a>
 								</div>
