@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'taggit',
     'captcha',
-    'blog'
+    'blog',
+    'accounts',
 ]
 #sites framework
 SITE_ID = 2
