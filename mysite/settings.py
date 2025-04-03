@@ -201,5 +201,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'testforsite04@gmail.com'  
-EMAIL_HOST_PASSWORD = 'omid1385reza' 
+EMAIL_HOST_PASSWORD = 'hwly hikp rkan cjbs' 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
