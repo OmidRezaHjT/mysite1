@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>به زودی...</title>
+  {% load static %}
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #007F89, #00B8C0); /* گرادینت نزدیک به لوگو */
+      font-family: 'Vazirmatn', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #ffffff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    img {
+      width: 120px;
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    h1 {
+      font-size: 3rem;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      opacity: 0;
+      animation: fadeIn 3s ease-in-out 1.5s forwards;
+    }
+
+    .loader {
+      margin-top: 30px;
+      border: 6px solid rgba(255,255,255,0.3);
+      border-top: 6px solid #ffffff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: fadeIn 2s ease-in-out 2s forwards, spin 1s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <img src="{% static 'img/logoo.jpg' %}" alt="logo">
+  <h1>به زودی در دسترس خواهد بود</h1>
+  <p>سایت در حال آماده‌سازی است. لطفاً بعداً دوباره سر بزنید.</p>
+  <div class="loader"></div>
+</body>
+</html>

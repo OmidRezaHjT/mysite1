@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'captcha',
     'blog',
     'accounts',
+    'comingsoon'
 ]
 #summernote configs
 UMMERNOTE_THEME = 'bsf'
