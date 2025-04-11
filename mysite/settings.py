@@ -11,9 +11,21 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = config("SECRET_KEY",default='django-insecure-1-s)9wtb654)#mvl%985emq2$e4fqb24q4=+s%1ny^s&b3hqv8')
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = config("DEBUG",cast=bool,default=True)
+
+ALLOWED_HOSTS = []
 
 
 
@@ -39,8 +51,12 @@ INSTALLED_APPS = [
     'captcha',
     'blog',
     'accounts',
-    'comingsoon'
+    'compressor',
 ]
+
+#sites framework
+SITE_ID = 2
+
 #summernote configs
 UMMERNOTE_THEME = 'bsf'
 SUMMERNOTE_CONFIG = {
@@ -110,6 +126,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
+# Database
+# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": config("DB_ENGINE", default="django.db.backends.postgresql"),
+            "NAME": config("DB_NAME", default="postgres"),
+            "USER": config("DB_USER", default="postgres"),
+            "PASSWORD": config("DB_PASSWORD", default="postgres"),
+            "HOST": config("DB_HOST", default="127.0.0.1"),
+            "PORT": config("DB_PORT", default=5432),
+        }
+    }
 
 
 
@@ -153,9 +190,20 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_ROOT = BASE_DIR / 'media'
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
 
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+]
 
+COMPRESS_ENABLED = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -166,8 +214,36 @@ INTERNAL_IPS = [
     "127.0.0.1",
 
 ]
-X_FRAME_OPTIONS = "SAMEORIGIN"
 from django.urls import reverse_lazy
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+# Forget pass
+EMAIL_BACKEND = config("EMAIL_BE", default='django.core.mail.backends.smtp.EmailBackend')
+EMAIL_HOST = config("EMAIL_HT", default='smtp.gmail.com')
+EMAIL_PORT = config("EMAIL_PT", default=587)
+EMAIL_USE_TLS = config("EMAILUSETLS", cast=bool ,default=True)
+EMAIL_HOST_USER = config("EMAIL_HT_USER", default='testforsite04@gmail.com'  )
+EMAIL_HOST_PASSWORD = config("EMAIL_HT_PASS", default='hwly hikp rkan cjbs' )
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default=EMAIL_HOST_USER)
+
+# security configs for production
+
+if config("USE_SSL_SETTING",cast=bool,default=False):
+    # https settings 
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+
+    # HSTS settings
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_PRELOAD = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+    # more security settings
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = "SAMEORIGIN"
+    SECURE_REFERRER_POLICY = "strict-origin"
+    USE_X_FORWARDED_HOST = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

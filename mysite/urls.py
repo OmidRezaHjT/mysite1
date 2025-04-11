@@ -25,7 +25,6 @@ from blog.sitemaps import BlogSitemap
 import debug_toolbar
 from django.contrib.auth import views as auth_views
 from django.urls import re_path
-from comingsoon.views import coming_soon
 sitemaps = {
    'static': StaticViewSitemap,
    'blog' : BlogSitemap
@@ -35,7 +34,6 @@ sitemaps = {
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^.*$', coming_soon),
     path('',include('website.urls')),
     path('blog',include('blog.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
