@@ -204,6 +204,9 @@ STATICFILES_FINDERS = [
 ]
 
 COMPRESS_ENABLED = True
+COMPRESS_OUTPUT_DIR = 'CACHE'
+COMPRESS_CSS_HASHING_METHOD = 'content'
+COMPRESS_JS_HASHING_METHOD = 'content'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
